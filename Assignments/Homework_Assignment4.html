@@ -3161,7 +3161,7 @@ vertical-align: -.125em;
 <section id="a" class="level3">
 <h3 class="anchored" data-anchor-id="a">a)</h3>
 <p>Read the dataset. Create the training and test sets with a 60%-40% split and <code>random_state = 1</code>. <strong>(1 point)</strong></p>
-<div id="993cd017" class="cell" data-execution_count="33">
+<div id="993cd017" class="cell" data-execution_count="1">
 <details open class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -3181,14 +3181,14 @@ vertical-align: -.125em;
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> RandomizedSearchCV</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="10a52c34" class="cell" data-execution_count="34">
+<div id="10a52c34" class="cell" data-execution_count="2">
 <details open class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>os.environ[<span class="st">&quot;OMP_NUM_THREADS&quot;</span>] <span class="op">=</span> <span class="st">&quot;1&quot;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="972b08c1" class="cell" data-execution_count="35">
+<div id="972b08c1" class="cell" data-execution_count="3">
 <details open class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>miami_data <span class="op">=</span> pd.read_csv(<span class="st">&quot;miami-housing.csv&quot;</span>)</span>
@@ -3310,23 +3310,23 @@ best CV score:  47896.90629635469
 </ul>
 <p>Any solution that fails to meet these requirements will not receive any credit. Note that any other aspects are entirely up to you, including the grid values, how to approach any coarse and/or fine grids, and the cross-validation settings (except the number of folds given above).</p>
 <p><strong>(10 points)</strong></p>
-<div id="750bc7aa" class="cell">
+<div id="750bc7aa" class="cell" data-execution_count="9">
 <details open class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>gbm_reg <span class="op">=</span> GradientBoostingRegressor(random_state <span class="op">=</span> <span class="dv">1</span>, loss <span class="op">=</span> <span class="st">&quot;huber&quot;</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>grid_gbm <span class="op">=</span> {</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;n_estimators&#39;</span>: [<span class="dv">100</span>],</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;max_depth&#39;</span>: [<span class="dv">20</span>, <span class="dv">21</span>, <span class="dv">22</span>],</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;learning_rate&#39;</span>: [<span class="fl">0.001</span>, <span class="fl">0.01</span>],</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;subsample&#39;</span>: [<span class="fl">0.75</span>]</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;n_estimators&#39;</span>: [<span class="dv">1730</span>, <span class="dv">1750</span>],</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;max_depth&#39;</span>: [<span class="dv">4</span>],</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;learning_rate&#39;</span>: [<span class="fl">0.01</span>, <span class="fl">0.01</span>, <span class="fl">0.1</span>],</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;subsample&#39;</span>: [<span class="fl">0.75</span>, <span class="dv">1</span>]</span>
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>gscv_gbm <span class="op">=</span> GridSearchCV(</span>
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    gbm_reg,</span>
 <span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    grid_gbm,</span>
 <span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    scoring <span class="op">=</span> <span class="st">&quot;neg_mean_absolute_error&quot;</span>,</span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    cv <span class="op">=</span> KFold(n_splits<span class="op">=</span><span class="dv">5</span>, random_state<span class="op">=</span><span class="dv">1</span>, shuffle<span class="op">=</span><span class="va">True</span>),</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    cv <span class="op">=</span> <span class="dv">5</span>,</span>
 <span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    n_jobs <span class="op">=</span> <span class="bu">int</span>(os.getenv(<span class="st">&quot;SLURM_NPROCS&quot;</span>, <span class="dv">1</span>)),</span>
 <span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    verbose <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -3335,20 +3335,25 @@ best CV score:  47896.90629635469
 <span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;best CV score: &quot;</span>, <span class="op">-</span>gscv_gbm.best_score_)</span>
 <span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(gscv_gbm.best_params_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Fitting 5 folds for each of 12 candidates, totalling 60 fits
+best CV score:  44997.13223570492
+{&#39;learning_rate&#39;: 0.1, &#39;max_depth&#39;: 4, &#39;n_estimators&#39;: 1750, &#39;subsample&#39;: 0.75}</code></pre>
+</div>
 </div>
 </section>
 <section id="g" class="level3">
 <h3 class="anchored" data-anchor-id="g">g)</h3>
 <p>Find the test MAE of the tuned Gradient Boosting model in Part f to see if it generalizes well. <strong>(1 point)</strong></p>
-<div id="bb09af0d" class="cell" data-execution_count="8">
+<div id="bb09af0d" class="cell" data-execution_count="10">
 <details open class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>best_gbm_model <span class="op">=</span> gscv_gbm.best_estimator_</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>y_pred_gbm <span class="op">=</span> best_gbm_model.predict(X_test)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mean_absolute_error(y_test, y_pred_gbm))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>best_gbm_model <span class="op">=</span> gscv_gbm.best_estimator_</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>y_pred_gbm <span class="op">=</span> best_gbm_model.predict(X_test)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mean_absolute_error(y_test, y_pred_gbm))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>43893.819908241174</code></pre>
+<pre><code>44012.523771613996</code></pre>
 </div>
 </div>
 </section>
@@ -3384,38 +3389,38 @@ best CV score:  47896.90629635469
 <div id="655be6cb" class="cell" data-execution_count="10">
 <details open class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> xgboost <span class="im">import</span> XGBRegressor, XGBClassifier</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">&quot;ignore&quot;</span>, category<span class="op">=</span><span class="pp">FutureWarning</span>)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>xgb_model <span class="op">=</span> XGBRegressor(</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    random_state <span class="op">=</span> <span class="dv">12</span>,</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    objective <span class="op">=</span> <span class="st">&#39;reg:squarederror&#39;</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>xgb_grid <span class="op">=</span> {</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;max_depth&#39;</span>: [<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">8</span>], </span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;n_estimators&#39;</span>: [<span class="dv">2000</span>, <span class="dv">2500</span>, <span class="dv">3000</span>], </span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;learning_rate&#39;</span>: [<span class="fl">0.01</span>, <span class="fl">0.1</span>], </span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;subsample&#39;</span>: [<span class="dv">1</span>], </span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;reg_lambda&quot;</span>: [<span class="fl">0.01</span>],</span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;gamma&quot;</span>: [<span class="dv">0</span>], </span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;colsample_bytree&#39;</span>: [<span class="fl">0.25</span>, <span class="fl">0.5</span>]</span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>gscv_xgb <span class="op">=</span> GridSearchCV(</span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>    xgb_model,</span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>    xgb_grid,</span>
-<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>    scoring <span class="op">=</span> <span class="st">&quot;neg_mean_absolute_error&quot;</span>,</span>
-<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>    cv <span class="op">=</span> KFold(n_splits<span class="op">=</span><span class="dv">5</span>, random_state<span class="op">=</span><span class="dv">1</span>, shuffle<span class="op">=</span><span class="va">True</span>),</span>
-<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>    n_jobs <span class="op">=</span> <span class="bu">int</span>(os.getenv(<span class="st">&quot;SLURM_NPROCS&quot;</span>, <span class="dv">1</span>)),</span>
-<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>    verbose <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>gscv_xgb.fit(X_train, y_train)</span>
-<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;best CV score:&quot;</span>, <span class="op">-</span>gscv_xgb.best_score_)</span>
-<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(gscv_xgb.best_params_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> xgboost <span class="im">import</span> XGBRegressor, XGBClassifier</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">&quot;ignore&quot;</span>, category<span class="op">=</span><span class="pp">FutureWarning</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>xgb_model <span class="op">=</span> XGBRegressor(</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    random_state <span class="op">=</span> <span class="dv">12</span>,</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    objective <span class="op">=</span> <span class="st">&#39;reg:squarederror&#39;</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>xgb_grid <span class="op">=</span> {</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;max_depth&#39;</span>: [<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">8</span>], </span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;n_estimators&#39;</span>: [<span class="dv">2000</span>, <span class="dv">2500</span>, <span class="dv">3000</span>], </span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;learning_rate&#39;</span>: [<span class="fl">0.01</span>, <span class="fl">0.1</span>], </span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;subsample&#39;</span>: [<span class="dv">1</span>], </span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;reg_lambda&quot;</span>: [<span class="fl">0.01</span>],</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;gamma&quot;</span>: [<span class="dv">0</span>], </span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;colsample_bytree&#39;</span>: [<span class="fl">0.25</span>, <span class="fl">0.5</span>]</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>gscv_xgb <span class="op">=</span> GridSearchCV(</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>    xgb_model,</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>    xgb_grid,</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>    scoring <span class="op">=</span> <span class="st">&quot;neg_mean_absolute_error&quot;</span>,</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>    cv <span class="op">=</span> KFold(n_splits<span class="op">=</span><span class="dv">5</span>, random_state<span class="op">=</span><span class="dv">1</span>, shuffle<span class="op">=</span><span class="va">True</span>),</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>    n_jobs <span class="op">=</span> <span class="bu">int</span>(os.getenv(<span class="st">&quot;SLURM_NPROCS&quot;</span>, <span class="dv">1</span>)),</span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>    verbose <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>gscv_xgb.fit(X_train, y_train)</span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;best CV score:&quot;</span>, <span class="op">-</span>gscv_xgb.best_score_)</span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(gscv_xgb.best_params_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
 <pre><code>/projects/e32107/src/stats-303/env2/lib/python3.12/site-packages/xgboost/core.py:377: FutureWarning: Your system has an old version of glibc (&lt; 2.28). We will stop supporting Linux distros with glibc older than 2.28 after **May 31, 2025**. Please upgrade to a recent Linux distro (with glibc &gt;= 2.28) to use future versions of XGBoost.
@@ -3483,9 +3488,9 @@ best CV score: 43299.843522722906
 <div id="39be0f9f" class="cell" data-execution_count="11">
 <details open class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>best_xgb_model <span class="op">=</span> gscv_xgb.best_estimator_</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>y_pred_xgb <span class="op">=</span> best_xgb_model.predict(X_test)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mean_absolute_error(y_test, y_pred_xgb))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>best_xgb_model <span class="op">=</span> gscv_xgb.best_estimator_</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>y_pred_xgb <span class="op">=</span> best_xgb_model.predict(X_test)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mean_absolute_error(y_test, y_pred_xgb))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>41332.80211651041</code></pre>
@@ -3509,34 +3514,34 @@ best CV score: 43299.843522722906
 <div id="7693974a" class="cell" data-execution_count="12">
 <details open class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> OneHotEncoder</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>train <span class="op">=</span> pd.read_csv(<span class="st">&quot;train.csv&quot;</span>)</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>test <span class="op">=</span> pd.read_csv(<span class="st">&quot;test.csv&quot;</span>)</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>train[<span class="st">&quot;y&quot;</span>] <span class="op">=</span> train[<span class="st">&quot;y&quot;</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="dv">1</span> <span class="cf">if</span> x <span class="op">==</span> <span class="st">&quot;yes&quot;</span> <span class="cf">else</span> <span class="dv">0</span>)</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>test[<span class="st">&quot;y&quot;</span>] <span class="op">=</span> test[<span class="st">&quot;y&quot;</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="dv">1</span> <span class="cf">if</span> x <span class="op">==</span> <span class="st">&quot;yes&quot;</span> <span class="cf">else</span> <span class="dv">0</span>)</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> train.drop(columns<span class="op">=</span>[<span class="st">&quot;y&quot;</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>y_train <span class="op">=</span> train[<span class="st">&quot;y&quot;</span>]</span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> test.drop(columns<span class="op">=</span>[<span class="st">&quot;y&quot;</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>y_test <span class="op">=</span> test[<span class="st">&quot;y&quot;</span>]</span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>categorical_vars <span class="op">=</span> [<span class="st">&quot;education&quot;</span>, <span class="st">&quot;month&quot;</span>]</span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>X_train_numerical <span class="op">=</span> X_train.drop(columns<span class="op">=</span>categorical_vars, axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>X_test_numerical <span class="op">=</span> X_test.drop(columns<span class="op">=</span>categorical_vars, axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>encoder <span class="op">=</span> OneHotEncoder(sparse_output<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>X_train_encoded <span class="op">=</span> encoder.fit_transform(X_train[categorical_vars])</span>
-<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>X_test_encoded <span class="op">=</span> encoder.transform(X_test[categorical_vars])</span>
-<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>X_train_encoded <span class="op">=</span> pd.DataFrame(X_train_encoded, columns<span class="op">=</span>encoder.get_feature_names_out(categorical_vars))</span>
-<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>X_test_encoded <span class="op">=</span> pd.DataFrame(X_test_encoded, columns<span class="op">=</span>encoder.get_feature_names_out(categorical_vars))</span>
-<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>X_train_cleaned <span class="op">=</span> pd.concat([X_train_numerical, X_train_encoded], axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>X_test_cleaned <span class="op">=</span> pd.concat([X_test_numerical, X_test_encoded], axis<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> OneHotEncoder</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>train <span class="op">=</span> pd.read_csv(<span class="st">&quot;train.csv&quot;</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>test <span class="op">=</span> pd.read_csv(<span class="st">&quot;test.csv&quot;</span>)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>train[<span class="st">&quot;y&quot;</span>] <span class="op">=</span> train[<span class="st">&quot;y&quot;</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="dv">1</span> <span class="cf">if</span> x <span class="op">==</span> <span class="st">&quot;yes&quot;</span> <span class="cf">else</span> <span class="dv">0</span>)</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>test[<span class="st">&quot;y&quot;</span>] <span class="op">=</span> test[<span class="st">&quot;y&quot;</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="dv">1</span> <span class="cf">if</span> x <span class="op">==</span> <span class="st">&quot;yes&quot;</span> <span class="cf">else</span> <span class="dv">0</span>)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> train.drop(columns<span class="op">=</span>[<span class="st">&quot;y&quot;</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>y_train <span class="op">=</span> train[<span class="st">&quot;y&quot;</span>]</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> test.drop(columns<span class="op">=</span>[<span class="st">&quot;y&quot;</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>y_test <span class="op">=</span> test[<span class="st">&quot;y&quot;</span>]</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>categorical_vars <span class="op">=</span> [<span class="st">&quot;education&quot;</span>, <span class="st">&quot;month&quot;</span>]</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>X_train_numerical <span class="op">=</span> X_train.drop(columns<span class="op">=</span>categorical_vars, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>X_test_numerical <span class="op">=</span> X_test.drop(columns<span class="op">=</span>categorical_vars, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>encoder <span class="op">=</span> OneHotEncoder(sparse_output<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>X_train_encoded <span class="op">=</span> encoder.fit_transform(X_train[categorical_vars])</span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>X_test_encoded <span class="op">=</span> encoder.transform(X_test[categorical_vars])</span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>X_train_encoded <span class="op">=</span> pd.DataFrame(X_train_encoded, columns<span class="op">=</span>encoder.get_feature_names_out(categorical_vars))</span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>X_test_encoded <span class="op">=</span> pd.DataFrame(X_test_encoded, columns<span class="op">=</span>encoder.get_feature_names_out(categorical_vars))</span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>X_train_cleaned <span class="op">=</span> pd.concat([X_train_numerical, X_train_encoded], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>X_test_cleaned <span class="op">=</span> pd.concat([X_test_numerical, X_test_encoded], axis<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -3564,40 +3569,40 @@ best CV score: 43299.843522722906
 <div id="91738ff4" class="cell" data-scrolled="true" data-execution_count="15">
 <details open class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> lightgbm <span class="im">import</span> LGBMRegressor, LGBMClassifier</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>cv <span class="op">=</span> StratifiedKFold(n_splits<span class="op">=</span><span class="dv">5</span>, shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>lgbm_model <span class="op">=</span> LGBMClassifier(</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    random_state <span class="op">=</span> <span class="dv">1</span>,</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    num_threads <span class="op">=</span> <span class="dv">1</span>,</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    scale_pos_weight <span class="op">=</span> <span class="fl">7.53</span>, <span class="co"># ratio between number of 0s and 1s in y_train</span></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    verbosity <span class="op">=</span> <span class="op">-</span><span class="dv">1</span></span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>lgbm_grid <span class="op">=</span> {</span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;max_depth&#39;</span>: [<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">8</span>], </span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;n_estimators&#39;</span>: [<span class="dv">2000</span>, <span class="dv">2500</span>, <span class="dv">3000</span>], </span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;learning_rate&#39;</span>: [<span class="fl">0.01</span>, <span class="fl">0.1</span>], </span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;subsample&quot;</span>: [<span class="fl">0.6</span>, <span class="fl">0.8</span>,<span class="dv">1</span>],</span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;reg_lambda&quot;</span>: [<span class="fl">0.01</span>, <span class="fl">0.1</span>, <span class="dv">1</span>],</span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;colsample_bytree&#39;</span>: [<span class="fl">0.25</span>, <span class="fl">0.5</span>]</span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>gscv_lgbm <span class="op">=</span> GridSearchCV(</span>
-<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>    lgbm_model,</span>
-<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>    lgbm_grid,</span>
-<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span>[<span class="st">&quot;accuracy&quot;</span>, <span class="st">&quot;recall&quot;</span>],</span>
-<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>    refit<span class="op">=</span><span class="st">&quot;accuracy&quot;</span>,</span>
-<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span>cv,</span>
-<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=</span><span class="bu">int</span>(os.getenv(<span class="st">&quot;SLURM_NPROCS&quot;</span>, <span class="dv">1</span>)),</span>
-<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>    verbose<span class="op">=</span><span class="dv">0</span></span>
-<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>gscv_lgbm.fit(X_train_cleaned, y_train)</span>
-<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(gscv_lgbm.best_params_)</span>
-<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(gscv_lgbm.best_score_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> lightgbm <span class="im">import</span> LGBMRegressor, LGBMClassifier</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>cv <span class="op">=</span> StratifiedKFold(n_splits<span class="op">=</span><span class="dv">5</span>, shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>lgbm_model <span class="op">=</span> LGBMClassifier(</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    random_state <span class="op">=</span> <span class="dv">1</span>,</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    num_threads <span class="op">=</span> <span class="dv">1</span>,</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    scale_pos_weight <span class="op">=</span> <span class="fl">7.53</span>, <span class="co"># ratio between number of 0s and 1s in y_train</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    verbosity <span class="op">=</span> <span class="op">-</span><span class="dv">1</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>lgbm_grid <span class="op">=</span> {</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;max_depth&#39;</span>: [<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">8</span>], </span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;n_estimators&#39;</span>: [<span class="dv">2000</span>, <span class="dv">2500</span>, <span class="dv">3000</span>], </span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;learning_rate&#39;</span>: [<span class="fl">0.01</span>, <span class="fl">0.1</span>], </span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;subsample&quot;</span>: [<span class="fl">0.6</span>, <span class="fl">0.8</span>,<span class="dv">1</span>],</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;reg_lambda&quot;</span>: [<span class="fl">0.01</span>, <span class="fl">0.1</span>, <span class="dv">1</span>],</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;colsample_bytree&#39;</span>: [<span class="fl">0.25</span>, <span class="fl">0.5</span>]</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>gscv_lgbm <span class="op">=</span> GridSearchCV(</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>    lgbm_model,</span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>    lgbm_grid,</span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span>[<span class="st">&quot;accuracy&quot;</span>, <span class="st">&quot;recall&quot;</span>],</span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>    refit<span class="op">=</span><span class="st">&quot;accuracy&quot;</span>,</span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span>cv,</span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=</span><span class="bu">int</span>(os.getenv(<span class="st">&quot;SLURM_NPROCS&quot;</span>, <span class="dv">1</span>)),</span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>    verbose<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>gscv_lgbm.fit(X_train_cleaned, y_train)</span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(gscv_lgbm.best_params_)</span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(gscv_lgbm.best_score_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>{&#39;colsample_bytree&#39;: 0.5, &#39;learning_rate&#39;: 0.01, &#39;max_depth&#39;: 8, &#39;n_estimators&#39;: 2500, &#39;reg_lambda&#39;: 1, &#39;subsample&#39;: 0.6}
@@ -3607,25 +3612,25 @@ best CV score: 43299.843522722906
 <div id="1991ad87" class="cell" data-scrolled="true" data-execution_count="18">
 <details open class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_predict</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> recall_score, accuracy_score</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>thresholds <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="fl">1.01</span>, <span class="fl">0.01</span>)</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>tuned_clf <span class="op">=</span> gscv_lgbm.best_estimator_</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>y_pred_probs <span class="op">=</span> cross_val_predict(tuned_clf, X_train_cleaned, y_train, cv<span class="op">=</span>cv, method<span class="op">=</span><span class="st">&#39;predict_proba&#39;</span>)[:, <span class="dv">1</span>]</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>cv_results <span class="op">=</span> pd.DataFrame(columns<span class="op">=</span>[<span class="st">&#39;Threshold&#39;</span>, <span class="st">&#39;Recall&#39;</span>, <span class="st">&#39;Accuracy&#39;</span>])</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>counter <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> thr <span class="kw">in</span> thresholds:</span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    cv_results.loc[counter, <span class="st">&quot;Threshold&quot;</span>] <span class="op">=</span> thr</span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>    cv_results.loc[counter, <span class="st">&quot;Recall&quot;</span>] <span class="op">=</span> recall_score(y_train, y_pred_probs <span class="op">&gt;</span> thr)</span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>    cv_results.loc[counter, <span class="st">&quot;Accuracy&quot;</span>] <span class="op">=</span> accuracy_score(y_train, y_pred_probs <span class="op">&gt;</span> thr)</span>
-<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>    counter <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>cv_results[(cv_results[<span class="st">&quot;Recall&quot;</span>] <span class="op">&gt;=</span> <span class="fl">0.65</span>) <span class="op">&amp;</span> (cv_results[<span class="st">&quot;Accuracy&quot;</span>] <span class="op">&gt;=</span> <span class="fl">0.7</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_predict</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> recall_score, accuracy_score</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>thresholds <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="fl">1.01</span>, <span class="fl">0.01</span>)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>tuned_clf <span class="op">=</span> gscv_lgbm.best_estimator_</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>y_pred_probs <span class="op">=</span> cross_val_predict(tuned_clf, X_train_cleaned, y_train, cv<span class="op">=</span>cv, method<span class="op">=</span><span class="st">&#39;predict_proba&#39;</span>)[:, <span class="dv">1</span>]</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>cv_results <span class="op">=</span> pd.DataFrame(columns<span class="op">=</span>[<span class="st">&#39;Threshold&#39;</span>, <span class="st">&#39;Recall&#39;</span>, <span class="st">&#39;Accuracy&#39;</span>])</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>counter <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> thr <span class="kw">in</span> thresholds:</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>    cv_results.loc[counter, <span class="st">&quot;Threshold&quot;</span>] <span class="op">=</span> thr</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>    cv_results.loc[counter, <span class="st">&quot;Recall&quot;</span>] <span class="op">=</span> recall_score(y_train, y_pred_probs <span class="op">&gt;</span> thr)</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>    cv_results.loc[counter, <span class="st">&quot;Accuracy&quot;</span>] <span class="op">=</span> accuracy_score(y_train, y_pred_probs <span class="op">&gt;</span> thr)</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>    counter <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>cv_results[(cv_results[<span class="st">&quot;Recall&quot;</span>] <span class="op">&gt;=</span> <span class="fl">0.65</span>) <span class="op">&amp;</span> (cv_results[<span class="st">&quot;Accuracy&quot;</span>] <span class="op">&gt;=</span> <span class="fl">0.7</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="18">
 <div>
@@ -3658,9 +3663,9 @@ best CV score: 43299.843522722906
 <div id="c3d86c40" class="cell" data-execution_count="19">
 <details open class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>tuned_rows <span class="op">=</span> cv_results[(cv_results[<span class="st">&quot;Recall&quot;</span>] <span class="op">&gt;=</span> <span class="fl">0.65</span>) <span class="op">&amp;</span> (cv_results[<span class="st">&quot;Accuracy&quot;</span>] <span class="op">&gt;=</span> <span class="fl">0.7</span>)]</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>tuned_thr <span class="op">=</span> tuned_rows[<span class="st">&quot;Threshold&quot;</span>].values[<span class="dv">0</span>]</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tuned_thr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>tuned_rows <span class="op">=</span> cv_results[(cv_results[<span class="st">&quot;Recall&quot;</span>] <span class="op">&gt;=</span> <span class="fl">0.65</span>) <span class="op">&amp;</span> (cv_results[<span class="st">&quot;Accuracy&quot;</span>] <span class="op">&gt;=</span> <span class="fl">0.7</span>)]</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>tuned_thr <span class="op">=</span> tuned_rows[<span class="st">&quot;Threshold&quot;</span>].values[<span class="dv">0</span>]</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tuned_thr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>0.43</code></pre>
@@ -3673,10 +3678,10 @@ best CV score: 43299.843522722906
 <div id="aa5c32d5" class="cell" data-execution_count="20">
 <details open class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>y_pred_proba_test <span class="op">=</span> tuned_clf.predict_proba(X_test_cleaned)[:, <span class="dv">1</span>]</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>y_pred_test <span class="op">=</span> y_pred_proba_test <span class="op">&gt;</span> tuned_thr</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(recall_score(y_test, y_pred_test))</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(accuracy_score(y_test, y_pred_test))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>y_pred_proba_test <span class="op">=</span> tuned_clf.predict_proba(X_test_cleaned)[:, <span class="dv">1</span>]</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>y_pred_test <span class="op">=</span> y_pred_proba_test <span class="op">&gt;</span> tuned_thr</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(recall_score(y_test, y_pred_test))</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(accuracy_score(y_test, y_pred_test))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>0.6795952782462057
@@ -3698,39 +3703,39 @@ best CV score: 43299.843522722906
 <div id="1859a57a" class="cell" data-execution_count="24">
 <details open class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> catboost <span class="im">import</span> CatBoostRegressor, CatBoostClassifier</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>cb_model <span class="op">=</span> CatBoostClassifier(</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    random_state <span class="op">=</span> <span class="dv">1</span>,</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    thread_count <span class="op">=</span> <span class="dv">1</span>,</span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    scale_pos_weight <span class="op">=</span> <span class="fl">7.53</span>, <span class="co"># ratio between number of 0s and 1s in y_train</span></span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    verbose <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>cb_grid <span class="op">=</span> {</span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;max_depth&#39;</span>: [<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">8</span>], </span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;n_estimators&#39;</span>: [<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>], </span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;learning_rate&#39;</span>: [<span class="fl">0.01</span>, <span class="fl">0.1</span>], </span>
-<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;subsample&quot;</span>: [<span class="fl">0.8</span>,<span class="dv">1</span>],</span>
-<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;reg_lambda&quot;</span>: [<span class="fl">0.1</span>, <span class="dv">1</span>],</span>
-<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>cb_gscv <span class="op">=</span> GridSearchCV(</span>
-<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>    cb_model,</span>
-<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>    cb_grid,</span>
-<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>    cv <span class="op">=</span> cv,</span>
-<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span>[<span class="st">&quot;accuracy&quot;</span>, <span class="st">&quot;recall&quot;</span>],</span>
-<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>    refit<span class="op">=</span><span class="st">&quot;accuracy&quot;</span>,</span>
-<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=</span><span class="bu">int</span>(os.getenv(<span class="st">&quot;SLURM_NPROCS&quot;</span>, <span class="dv">1</span>)),</span>
-<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a>    verbose<span class="op">=</span><span class="dv">0</span></span>
-<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a>cb_gscv.fit(X_train_cleaned, y_train)</span>
-<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;best score:&quot;</span>, cb_gscv.best_score_)</span>
-<span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cb_gscv.best_params_)</span>
-<span id="cb26-33"><a href="#cb26-33" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> catboost <span class="im">import</span> CatBoostRegressor, CatBoostClassifier</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>cb_model <span class="op">=</span> CatBoostClassifier(</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    random_state <span class="op">=</span> <span class="dv">1</span>,</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    thread_count <span class="op">=</span> <span class="dv">1</span>,</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    scale_pos_weight <span class="op">=</span> <span class="fl">7.53</span>, <span class="co"># ratio between number of 0s and 1s in y_train</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    verbose <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>cb_grid <span class="op">=</span> {</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;max_depth&#39;</span>: [<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">8</span>], </span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;n_estimators&#39;</span>: [<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>], </span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;learning_rate&#39;</span>: [<span class="fl">0.01</span>, <span class="fl">0.1</span>], </span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;subsample&quot;</span>: [<span class="fl">0.8</span>,<span class="dv">1</span>],</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;reg_lambda&quot;</span>: [<span class="fl">0.1</span>, <span class="dv">1</span>],</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>cb_gscv <span class="op">=</span> GridSearchCV(</span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>    cb_model,</span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>    cb_grid,</span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>    cv <span class="op">=</span> cv,</span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span>[<span class="st">&quot;accuracy&quot;</span>, <span class="st">&quot;recall&quot;</span>],</span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>    refit<span class="op">=</span><span class="st">&quot;accuracy&quot;</span>,</span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=</span><span class="bu">int</span>(os.getenv(<span class="st">&quot;SLURM_NPROCS&quot;</span>, <span class="dv">1</span>)),</span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a>    verbose<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a>cb_gscv.fit(X_train_cleaned, y_train)</span>
+<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;best score:&quot;</span>, cb_gscv.best_score_)</span>
+<span id="cb27-32"><a href="#cb27-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cb_gscv.best_params_)</span>
+<span id="cb27-33"><a href="#cb27-33" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
 <pre><code>/projects/e32107/src/stats-303/env2/lib/python3.12/site-packages/xgboost/core.py:377: FutureWarning: Your system has an old version of glibc (&lt; 2.28). We will stop supporting Linux distros with glibc older than 2.28 after **May 31, 2025**. Please upgrade to a recent Linux distro (with glibc &gt;= 2.28) to use future versions of XGBoost.
@@ -3822,20 +3827,20 @@ TBB Warning: The number of workers is currently limited to 15. The request for 5
 <div id="7f42a3f2" class="cell" data-execution_count="25">
 <details open class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>tuned_clf_cat <span class="op">=</span> cb_gscv.best_estimator_</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>y_pred_probs_cat <span class="op">=</span> cross_val_predict(tuned_clf, X_train_cleaned, y_train, cv<span class="op">=</span>cv, method<span class="op">=</span><span class="st">&#39;predict_proba&#39;</span>)[:, <span class="dv">1</span>]</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>cv_results_cat <span class="op">=</span> pd.DataFrame(columns<span class="op">=</span>[<span class="st">&#39;Threshold&#39;</span>, <span class="st">&#39;Recall&#39;</span>, <span class="st">&#39;Accuracy&#39;</span>])</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>counter <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> thr <span class="kw">in</span> thresholds:</span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>    cv_results_cat.loc[counter, <span class="st">&quot;Threshold&quot;</span>] <span class="op">=</span> thr</span>
-<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>    cv_results_cat.loc[counter, <span class="st">&quot;Recall&quot;</span>] <span class="op">=</span> recall_score(y_train, y_pred_probs_cat <span class="op">&gt;</span> thr)</span>
-<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>    cv_results_cat.loc[counter, <span class="st">&quot;Accuracy&quot;</span>] <span class="op">=</span> accuracy_score(y_train, y_pred_probs_cat <span class="op">&gt;</span> thr)</span>
-<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>    counter <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>cv_results_cat[(cv_results_cat[<span class="st">&quot;Recall&quot;</span>] <span class="op">&gt;=</span> <span class="fl">0.65</span>) <span class="op">&amp;</span> (cv_results_cat[<span class="st">&quot;Accuracy&quot;</span>] <span class="op">&gt;=</span> <span class="fl">0.7</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>tuned_clf_cat <span class="op">=</span> cb_gscv.best_estimator_</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>y_pred_probs_cat <span class="op">=</span> cross_val_predict(tuned_clf, X_train_cleaned, y_train, cv<span class="op">=</span>cv, method<span class="op">=</span><span class="st">&#39;predict_proba&#39;</span>)[:, <span class="dv">1</span>]</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>cv_results_cat <span class="op">=</span> pd.DataFrame(columns<span class="op">=</span>[<span class="st">&#39;Threshold&#39;</span>, <span class="st">&#39;Recall&#39;</span>, <span class="st">&#39;Accuracy&#39;</span>])</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>counter <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> thr <span class="kw">in</span> thresholds:</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>    cv_results_cat.loc[counter, <span class="st">&quot;Threshold&quot;</span>] <span class="op">=</span> thr</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>    cv_results_cat.loc[counter, <span class="st">&quot;Recall&quot;</span>] <span class="op">=</span> recall_score(y_train, y_pred_probs_cat <span class="op">&gt;</span> thr)</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>    cv_results_cat.loc[counter, <span class="st">&quot;Accuracy&quot;</span>] <span class="op">=</span> accuracy_score(y_train, y_pred_probs_cat <span class="op">&gt;</span> thr)</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>    counter <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>cv_results_cat[(cv_results_cat[<span class="st">&quot;Recall&quot;</span>] <span class="op">&gt;=</span> <span class="fl">0.65</span>) <span class="op">&amp;</span> (cv_results_cat[<span class="st">&quot;Accuracy&quot;</span>] <span class="op">&gt;=</span> <span class="fl">0.7</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="25">
 <div>
@@ -3868,9 +3873,9 @@ TBB Warning: The number of workers is currently limited to 15. The request for 5
 <div id="5118f5e0" class="cell" data-execution_count="26">
 <details open class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>tuned_rows_cat <span class="op">=</span> cv_results_cat[(cv_results_cat[<span class="st">&quot;Recall&quot;</span>] <span class="op">&gt;=</span> <span class="fl">0.65</span>) <span class="op">&amp;</span> (cv_results_cat[<span class="st">&quot;Accuracy&quot;</span>] <span class="op">&gt;=</span> <span class="fl">0.7</span>)]</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>tuned_thr_cat <span class="op">=</span> tuned_rows_cat[<span class="st">&quot;Threshold&quot;</span>].values[<span class="dv">0</span>]</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tuned_thr_cat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>tuned_rows_cat <span class="op">=</span> cv_results_cat[(cv_results_cat[<span class="st">&quot;Recall&quot;</span>] <span class="op">&gt;=</span> <span class="fl">0.65</span>) <span class="op">&amp;</span> (cv_results_cat[<span class="st">&quot;Accuracy&quot;</span>] <span class="op">&gt;=</span> <span class="fl">0.7</span>)]</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>tuned_thr_cat <span class="op">=</span> tuned_rows_cat[<span class="st">&quot;Threshold&quot;</span>].values[<span class="dv">0</span>]</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tuned_thr_cat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>0.43</code></pre>
@@ -3883,10 +3888,10 @@ TBB Warning: The number of workers is currently limited to 15. The request for 5
 <div id="3bdad172" class="cell" data-execution_count="31">
 <details open class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>y_pred_proba_cat <span class="op">=</span> tuned_clf_cat.predict_proba(X_test_cleaned)[:, <span class="dv">1</span>]</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>y_pred_cat <span class="op">=</span> y_pred_proba_cat <span class="op">&gt;</span> tuned_thr_cat</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(recall_score(y_test,y_pred_cat))</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(accuracy_score(y_test,y_pred_cat))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>y_pred_proba_cat <span class="op">=</span> tuned_clf_cat.predict_proba(X_test_cleaned)[:, <span class="dv">1</span>]</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>y_pred_cat <span class="op">=</span> y_pred_proba_cat <span class="op">&gt;</span> tuned_thr_cat</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(recall_score(y_test,y_pred_cat))</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(accuracy_score(y_test,y_pred_cat))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>0.6795952782462057
